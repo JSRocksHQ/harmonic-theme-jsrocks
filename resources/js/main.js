@@ -40,10 +40,13 @@ $(document).ready(function() {
 });
 
 // form search
-document.getElementById('s').addEventListener('submit', function(e) {
-    form.q.value = form.q.value + ' site:' + window.location.hostname.replace(/www./g, '');
-    alert(form.q.value);
-});
+(function search(){
+	var form = document.getElementById('s');
+
+	form.addEventListener('submit', function(e) {
+	    form.q.value = form.q.value + ' site:' + window.location.hostname.replace(/www./g, '');
+	});
+})();
 
 // scrolltop
 (function scrollTop(){
@@ -111,8 +114,8 @@ document.getElementById('s').addEventListener('submit', function(e) {
 			article += '<article class="col-md-4 col-sm-6 col-xs-12 post-normal item-post post-fade-6">';
 			article += '<div class="container-post">';
 			article +=     '<aside class="share-post">';
-			article +=         '<a href="#" data-provider="https://www.facebook.com/sharer.php?u=" data-post-url="/' + post.link + '" class="share-face share-item" title="Share this post"><img src="/img/icon-face-header.png" alt="icon facebook"></a>';
-			article +=         '<a href="#" data-provider="https://twitter.com/intent/tweet?url=" data-post-url="/' + post.link + '" class="share-twitter share-item" title="Tweet this post"><img src="/img/icon-twitter-header.png" alt="icon twitter"></a>';
+			article +=         '<a href="#" data-provider="https://www.facebook.com/sharer.php?u=" data-post-url="/' + post.link + '" class="share-face share-item" title="Share this post"><img src="/images/icon-face-header.png" alt="icon facebook"></a>';
+			article +=         '<a href="#" data-provider="https://twitter.com/intent/tweet?url=" data-post-url="/' + post.link + '" class="share-twitter share-item" title="Tweet this post"><img src="/images/icon-twitter-header.png" alt="icon twitter"></a>';
 			article +=     '</aside>';
 			article +=     '<div class="date-post">' + post.date + '</div>';
 			article +=     '<h1 class="title-post"><a href="'+ window.location.origin + '/' + post.link + '">' + post.title + '</a></h1>';
@@ -171,16 +174,7 @@ document.getElementById('s').addEventListener('submit', function(e) {
 			article  = '';
 
 			if (postLen >= 6) {
-				console.log(postLen);
 				for (var i = 0; i < 6; i++) {
-
-				}
-
-				posts.splice(0, 6);		
-			} else {
-				console.log(postLen);
-
-				for (var i = 0; i < postLen; i++) {
 					articleCat  = '';
 					post = posts[i];
 					categoriesLen = post.categories.length;
@@ -194,8 +188,8 @@ document.getElementById('s').addEventListener('submit', function(e) {
 					article += '<article class="col-md-4 col-sm-6 col-xs-12 post-normal item-post post-fade-6">';
 					article += '<div class="container-post">';
 					article +=     '<aside class="share-post">';
-					article +=         '<a href="#" data-provider="https://www.facebook.com/sharer.php?u=" data-post-url="/' + post.link + '" class="share-face share-item" title="Share this post"><img src="/img/icon-face-header.png" alt="icon facebook"></a>';
-					article +=         '<a href="#" data-provider="https://twitter.com/intent/tweet?url=" data-post-url="/' + post.link + '" class="share-twitter share-item" title="Tweet this post"><img src="/img/icon-twitter-header.png" alt="icon twitter"></a>';
+					article +=         '<a href="#" data-provider="https://www.facebook.com/sharer.php?u=" data-post-url="/' + post.link + '" class="share-face share-item" title="Share this post"><img src="/images/icon-face-header.png" alt="icon facebook"></a>';
+					article +=         '<a href="#" data-provider="https://twitter.com/intent/tweet?url=" data-post-url="/' + post.link + '" class="share-twitter share-item" title="Tweet this post"><img src="/images/icon-twitter-header.png" alt="icon twitter"></a>';
 					article +=     '</aside>';
 					article +=     '<div class="date-post">' + post.date + '</div>';
 					article +=     '<h1 class="title-post"><a href="'+ window.location.origin + '/' + post.link + '">' + post.title + '</a></h1>';
@@ -213,9 +207,52 @@ document.getElementById('s').addEventListener('submit', function(e) {
 					article += '</div>';
 					article += '</article>';
 				}
+
+				containerMorePosts.innerHTML = article;
+				posts.splice(0, 6);	
+
+			} else {
+				for (var i = 0; i < postLen; i++) {
+					articleCat  = '';
+					post = posts[i];
+					categoriesLen = post.categories.length;
+
+					for (var j = 0; j < categoriesLen; j++) {
+						category = post.categories[j].toLowerCase().trim();
+						articleCat += '<li class="item-tag-post"><a href="'+ window.location.origin + linkCat + category +'">' + category + '</a></li>';
+					}
+
+					console.log(post.content);
+					
+					// posts template
+					article += '<article class="col-md-4 col-sm-6 col-xs-12 post-normal item-post post-fade-6">';
+					article += '<div class="container-post">';
+					article +=     '<aside class="share-post">';
+					article +=         '<a href="#" data-provider="https://www.facebook.com/sharer.php?u=" data-post-url="/' + post.link + '" class="share-face share-item" title="Share this post"><img src="/images/icon-face-header.png" alt="icon facebook"></a>';
+					article +=         '<a href="#" data-provider="https://twitter.com/intent/tweet?url=" data-post-url="/' + post.link + '" class="share-twitter share-item" title="Tweet this post"><img src="/images/icon-twitter-header.png" alt="icon twitter"></a>';
+					article +=     '</aside>';
+					article +=     '<div class="date-post">' + post.date + '</div>';
+					article +=     '<h1 class="title-post"><a href="'+ window.location.origin + '/' + post.link + '">' + post.title + '</a></h1>';
+					article +=     '<p class="intro-post">' + post.content + '</p>';
+					article +=     '<section class="footer-post">';
+					article +=         '<ul class="tags-post">' + articleCat + '</ul>';
+					article +=         '<div class="author-post">';
+					article +=             '<div class="avatar-author"><img src="' + post.authorPicture + '" alt="avatar post"></div>';
+					article +=             '<div class="info-author">';
+					article +=                 '<span>Posted by</span>';
+					article +=                 '<a href="' + post.authorLink + '" class="author">' + post.authorName + '</a>';
+					article +=             '</div>';
+					article +=         '</div>';
+					article +=     '</section>';
+					article += '</div>';
+					article += '</article>';
+				}
+
 				containerMorePosts.innerHTML = article;
 				posts.splice(0, postLen);
 			}
+
+			$('.item-post').addClass('fadeInBox');
 		});
 	}
 })();
