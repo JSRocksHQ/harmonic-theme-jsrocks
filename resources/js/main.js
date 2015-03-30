@@ -85,6 +85,7 @@ $(document).ready(function() {
 			posts 	 = harmonic.getPosts(),
 			pathname = window.location.pathname,
 			re 		 = /\/pt-br\//.exec(pathname),
+			reDescription,
 			article  = '',
 			articleCat,
 			linkCat,
@@ -108,6 +109,16 @@ $(document).ready(function() {
 			for (var j = 0; j < categoriesLen; j++) {
 				category = post.categories[j].toLowerCase().trim();
 				articleCat += '<li class="item-tag-post"><a href="'+ window.location.origin + linkCat + category +'">' + category + '</a></li>';
+			}
+
+			reDescription = /<p>/.exec(post.content);
+
+			// DRY
+			if (reDescription && reDescription[0] === '<p>') {
+				console.log('dale');
+				post.content = post.content.replace('<p>', '').replace('</p>', '');
+			} else {
+				console.log('não dale');
 			}
 			
 			// posts template
@@ -147,6 +158,7 @@ $(document).ready(function() {
 		posts 	 = harmonic.getPosts(),
 		pathname = window.location.pathname,
 		re 		 = /\/pt-br\//.exec(pathname),
+		reDescription,
 		article,
 		articleCat,
 		linkCat,
@@ -176,12 +188,23 @@ $(document).ready(function() {
 			if (postLen >= 6) {
 				for (var i = 0; i < 6; i++) {
 					articleCat  = '';
+					
 					post = posts[i];
 					categoriesLen = post.categories.length;
 
 					for (var j = 0; j < categoriesLen; j++) {
 						category = post.categories[j].toLowerCase().trim();
 						articleCat += '<li class="item-tag-post"><a href="'+ window.location.origin + linkCat + category +'">' + category + '</a></li>';
+					}
+
+					reDescription = /<p>/.exec(post.content);
+
+					// DRY
+					if (reDescription && reDescription[0] === '<p>') {
+						console.log('dale');
+						post.content = post.content.replace('<p>', '').replace('</p>', '');
+					} else {
+						console.log('não dale');
 					}
 					
 					// posts template
@@ -222,7 +245,15 @@ $(document).ready(function() {
 						articleCat += '<li class="item-tag-post"><a href="'+ window.location.origin + linkCat + category +'">' + category + '</a></li>';
 					}
 
-					console.log(post.content);
+					reDescription = /<p>/.exec(post.content);
+
+					// DRY
+					if (reDescription && reDescription[0] === '<p>') {
+						console.log('dale');
+						post.content = post.content.replace('<p>', '').replace('</p>', '');
+					} else {
+						console.log('não dale');
+					}
 					
 					// posts template
 					article += '<article class="col-md-4 col-sm-6 col-xs-12 post-normal item-post post-fade-6">';
