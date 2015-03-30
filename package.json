@@ -1,0 +1,19 @@
+{
+  "name": "harmonic-theme-jsrocks",
+  "version": "0.0.0",
+  "description": "JSROCKS theme",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/es6rocks/harmonic-theme-jsrocks.git"
+  },
+  "author": "Robson Júnior",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/es6rocks/harmonic-theme-jsrocks/issues"
+  },
+  "homepage": "https://github.com/es6rocks/harmonic-theme-jsrocks"
+}
