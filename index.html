@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <!-- Responsive Meta Data -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> <!--  site com responsivo / comente caso contrário-->
+
+    <!-- Core Meta Data -->
+    <meta name="author" content="@italowaxman">
+    <meta name="description" content="A collaborative website about the Javascript, ECMAScript sixth edition, a.k.a. ES6, Harmonic and others.">
+    <meta name="keywords" content="javascript, JS, ECMAScript, ES6, Harmonic, front-end">
+
+    <!-- Facebook Tags -->
+    <meta property="og:description" content="A collaborative website about the Javascript, ECMAScript sixth edition, a.k.a. ES6, Harmonic and others.">
+    <meta property="og:image" content="/images/thumb_face.png">
+    <meta property="og:site_name" content="JS Rocks">
+    <meta property="og:title" content="JS Rocks">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://jsrocks.com">
+
+    <!-- Twitter tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="http://jsrocks.com">
+    <meta name="twitter:creator" content="Usuário do Twitter">
+    <meta name="twitter:title" content="JS Rocks">
+    <meta name="twitter:description" content="A collaborative website about the Javascript, ECMAScript sixth edition, a.k.a. ES6, Harmonic and others.">
+    <meta name="twitter:image" content="assetes/images/thumb_face.png">
+
+    <!-- Humans -->
+    <link rel="author" href="humans.txt" />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <link rel="shortcut icon" href="Endereço do arquivo/favicon.png" type="image/png"> <!-- link absoluto do favicon -->
+
+    <link rel="stylesheet" href="/css/vendor/prism.css"/>    
+    <link rel="stylesheet" href="/css/vendor/normalize.css">
+    <link rel="stylesheet" href="/css/vendor/bootstrap.css">
+    <link rel="stylesheet" href="/css/vendor/bootstrap-theme.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="stylesheet" href="/css/animations.css">
+    
+    <title>JS Rocks</title>
+</head>
+<body data-page="home">
+    <div class="wrapper">
+        {% include "partials/header.html" %}
+
+        <div class="content">
+            <div class="container">
+                <section class="posts-list">
+                    <div class="row">
+
+                        {% for post in posts %}
+                            {% if loop.index < 3 %}
+                                <article class="col-sm-6 col-xs-12 post-big item-post post-fade-{{loop.index}}">
+                            {% else %}
+                                <article class="col-md-4 col-sm-6 col-xs-12 post-normal item-post post-fade-{{loop.index}}">
+                            {% endif %}
+
+                                <div class="container-post">
+                                    <aside class="share-post">
+                                        <a href="#" data-provider="https://www.facebook.com/sharer.php?u=" data-post-url="/{{post.link}}" class="share-face share-item" title="Share this post"><img src="/images/icon-face-header.png" alt="icon facebook"></a>
+                                        <a href="#" data-provider="https://twitter.com/intent/tweet?url=" data-post-url="/{{post.link}}" class="share-twitter share-item" title="Tweet this post"><img src="/images/icon-twitter-header.png" alt="icon twitter"></a>
+                                    </aside>
+                                    <div class="date-post">{{ post.date }}</div>
+                                    <h1 class="title-post"><a href="/{{ post.link }}" alt="{{ post.title }}">{{ post.title }}</a></h1>
+                                    <p class="intro-post">Among so many great new features in ES6, Arrow Functions(or Fat Arrow Functions) is one that desirves attention! It is not just awesome, it's also great to work with scopes, shortcuts some tecniques ...</p>
+                                    <section class="footer-post">
+                                        <ul class="tags-post">
+                                             {% for category in post.categories %}
+                                                <li class="item-tag-post"><a href="/categories/{% if post.metadata.default_lang %}{{ post.metadata.lang }}/{% endif %}{{ category | lower | trim }}">{{ category }}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                        <div class="author-post">
+                                            <div class="avatar-author"><img src="{{ post.authorPicture }}" alt="{{ post.authorName }}"></div>
+                                             <div class="info-author">
+                                                <span>Posted by</span>
+                                                <a href="{{ post.authorLink }}" class="author" alt="Author: {{ post.authorName }}">{{ post.authorName }}</a>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </article>
+                        {% endfor %}
+
+                        <div id="containerMorePosts">
+                            <!-- More posts -->
+                        </div>            
+
+                    </div>
+                    <div class="row row-more-posts">
+                        <div class="col-md-12 more-posts">
+                            <button id="morePosts" class="button-post button-more-posts">
+                                <img class="icon-more" src="/images/icon-button-more.png" alt="icon more posts">
+                                <span>More Posts</span>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+                <section class="testemonials">
+                    <div class="row">
+                        <div class="col-md-12 title-testemonials">
+                            <div class="centering">
+                                <img class="icon-testemonials" src="/images/icon-title-testemonials.png" alt="icon testemonials">
+                                <h2>Testemonials</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="list-testemonials">
+                            <div class="centering">
+
+                                <div class="col-md-4 item-testemonial">
+                                    <div class="txt-testemonial">
+                                        <p>"ES6 improves developer ergonomics massively and es6rocks.com will help you grok the benefit you can reap and how to get it today. Love it."</p>
+                                        <div class="arrow-talk"></div>
+                                    </div>                              
+                                    <div class="author-testemonial">
+                                        <div class="avatar-testemonial"><img src="https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-xap1/v/t1.0-9/s720x720/10353036_813104195802_7941905438286773361_n.jpg?oh=beb6ae8c2592e1d4643d4c53dcb90e25&oe=55B79209&__gda__=1438435571_06f637521de054e10a57cba2798c1b41" alt="image testemonial"></div>
+                                        <div class="info-author">
+                                            <h3 class="author">Paul Irish</h3>
+                                            <div class="social-list">
+                                                <a href="http://twitter.com/paul_irish" class="item-social"><img src="/images/icon-twitter-header.png" alt="icon twitter" title="Twitter"></a>
+                                                <a href="http://github.com/paulirish" class="item-social"><img src="/images/icon-github-header.png" alt="icon github" title="Github"></a>
+                                            </div>
+                                            <span class="work-place">Google</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 item-testemonial">
+                                    <div class="txt-testemonial">
+                                        <p>"ES6 Rocks is a brilliant initiative, if you're looking for relevant content about what's coming next for the JavaScript language, here's the place to find."</p>
+                                        <div class="arrow-talk"></div>
+                                    </div>                              
+                                    <div class="author-testemonial">
+                                        <div class="avatar-testemonial"><img src="https://scontent-gru.xx.fbcdn.net/hphotos-xpf1/v/t1.0-9/1508142_10201835389099369_665640594_n.jpg?oh=03481a872bcd57332f955db3ba063fdd&oe=55792D9F" alt="image testemonial"></div>
+                                        <div class="info-author">
+                                            <h3 class="author">Zeno Rocha</h3>
+                                            <div class="social-list">
+                                                <a href="http://twitter.com/zenorocha" class="item-social"><img src="/images/icon-twitter-header.png" alt="icon twitter" title="Twitter"></a>
+                                                <a href="http://github.com/zenorocha" class="item-social"><img src="/images/icon-github-header.png" alt="icon github" title="Github"></a>
+                                            </div>
+                                            <span class="work-place">Liferay</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        {% include "partials/footer.html" %}        
+    </div>
+
+    {% include "partials/scripts.html" %}
+</body>
+</html>

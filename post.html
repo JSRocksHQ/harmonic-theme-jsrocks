@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <!-- Responsive Meta Data -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> <!--  site com responsivo / comente caso contrário-->
+
+    <!-- Core Meta Data -->
+    <meta name="author" content="@italowaxman">
+    <meta name="description" content="A collaborative website about the Javascript, ECMAScript sixth edition, a.k.a. ES6, Harmonic and others.">
+    <meta name="keywords" content="javascript, JS, ECMAScript, ES6, Harmonic, front-end">
+
+    <!-- Facebook Tags -->
+    <meta property="og:description" content="A collaborative website about the Javascript, ECMAScript sixth edition, a.k.a. ES6, Harmonic and others.">
+    <meta property="og:image" content="/images/thumb_face.png">
+    <meta property="og:site_name" content="JS Rocks">
+    <meta property="og:title" content="JS Rocks">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://jsrocks.com">
+
+    <!-- Twitter tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="http://jsrocks.com">
+    <meta name="twitter:creator" content="Usuário do Twitter">
+    <meta name="twitter:title" content="JS Rocks">
+    <meta name="twitter:description" content="A collaborative website about the Javascript, ECMAScript sixth edition, a.k.a. ES6, Harmonic and others.">
+    <meta name="twitter:image" content="/images/thumb_face.png">
+
+    <!-- Humans -->
+    <link rel="author" href="humans.txt" />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <link rel="shortcut icon" href="Endereço do arquivo/favicon.png" type="image/png"> <!-- link absoluto do favicon -->
+
+
+    <link rel="stylesheet" href="/css/vendor/prism.css"/>    
+    <link rel="stylesheet" href="/css/vendor/normalize.css">
+    <link rel="stylesheet" href="/css/vendor/bootstrap.css">
+    <link rel="stylesheet" href="/css/vendor/bootstrap-theme.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="stylesheet" href="/css/animations.css">
+    
+    <title>{{ post.metadata.title }} - {{ config.title }}</title>
+</head>
+<body data-page="article">
+    <div class="wrapper">
+        {% include "partials/header.html" %}
+
+        <div class="content">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-xs-12 header-article">
+                        <div class="author-post">
+                            <div class="avatar-author"><img src="{{post.metadata.authorPicture}}" alt="{{post.metadata.authorName}}"></div>
+                            <div class="info-author">
+                                <span>Posted by</span>
+                                <a href="{{post.metadata.authorLink}}" rel="author" class="author">{{post.metadata.authorName}}</a>
+                            </div>
+                        </div>
+                        <div class="date-post">{{post.metadata.date}}</div>
+                        <h1 class="title-post">{{ post.metadata.title }}</h1>
+                        <div class="centering">
+                            <ul class="tags-post">
+                                {% for category in post.metadata.categories %}
+                                    <li class="item-tag-post"><a href="/categories/{% if post.metadata.default_lang %}{{ post.metadata.lang }}/{% endif %}{{ category | lower | trim }}">{{ category }}">scope</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="article-content">
+                            <aside class="share-post">
+                                <a href="#" data-provider="https://www.facebook.com/sharer.php?u=" data-post-url="/{{post.metadata.link}}" class="share-face share-item" title="Share this post"><img src="/images/icon-face-header.png" alt="icon facebook"></a>
+                                <a href="#" data-provider="https://twitter.com/intent/tweet?url=" data-post-url="/{{post.metadata.link}}" class="share-twitter share-item" title="Tweet this post"><img src="/images/icon-twitter-header.png" alt="icon twitter"></a>
+                            </aside>
+                            {{ post.content }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row row-comments">
+                    <div class="col-md-12 title-testemonials title-comments-article">
+                        <div class="centering">
+                            <img class="icon-comments floating" src="/images/icon-content-comments.png" alt="icon comments">
+                            <h2>Comments</h2>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="comments-container">
+                            <div id="disqus_thread"></div>
+                            <noscript>
+                                Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+                            </noscript>
+                            <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row row-other-posts">
+                    <div class="col-md-12 title-testemonials title-comments-article">
+                        <div class="centering">
+                            <svg version="1.1" class="thunder" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                 width="17.191px" height="29.535px" viewBox="0 0 17.191 29.535" enable-background="new 0 0 17.191 29.535" xml:space="preserve">
+                            <polygon fill-rule="evenodd" clip-rule="evenodd" fill="#FCCF0F" points="17.191,0 1.438,15.457 6.365,15.466 0,29.535 
+                                17.166,12.907 11.773,12.661 "/>
+                            </svg>
+                            <h2>Other Posts</h2>
+                        </div>
+                    </div>
+                    <div id="otherPosts" class="list-other-posts">
+                        <!--
+                        {% for post in posts %}
+                             {% if loop.index < 4 %}
+                                <article class="col-md-4 col-sm-6 col-xs-12 post-normal item-post post-fade-6">
+                                    <div class="container-post">
+                                        <aside class="share-post">
+                                            <a href="#" class="share-face share-item" title="Share this post"><img src="/images/icon-face-header.png" alt="icon facebook"></a>
+                                            <a href="#" class="share-twitter share-item" title="Tweet this post"><img src="/images/icon-twitter-header.png" alt="icon twitter"></a>
+                                        </aside>
+                                        <div class="date-post">{{ post.date }}</div>
+                                        <h1 class="title-post"><a href="/{{ post.link }}">{{ post.title }}</a></h1>
+                                        <p class="intro-post">{{post.content }}</p>
+                                        <section class="footer-post">
+                                            <ul class="tags-post">
+                                            {% for category in post.categories %}
+                                                <li class="item-tag-post"><a href="/categories/{% if post.metadata.default_lang %}{{ post.metadata.lang }}/{% endif %}{{ category | lower | trim }}">{{ category }}</a></li>
+                                            {% endfor %}    
+                                            </ul>
+                                            <div class="author-post">
+                                                <div class="avatar-author"><img src="/images/img-avatar-post.jpg" alt="avatar post"></div>
+                                                <div class="info-author">
+                                                    <span>Posted by</span>
+                                                    <a href="{{ post.authorLink }}" class="author">{{post.authorName}}</a>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+                                </article>
+                             {% endif %}
+                        {% endfor %}
+                        -->
+                    </div>
+                </div>
+
+                <div class="row row-button">
+                    <button id="goToTop" class="button-post button-top">
+                        <img src="/images/icon-button-top.png" alt="icon scroll to top">
+                        <span>Scroll to Top</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        {% include "partials/footer.html" %}        
+    </div>
+
+    {% include "partials/scripts.html" %}
+</body>
+</html>
