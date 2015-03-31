@@ -39,268 +39,293 @@ $(document).ready(function() {
 	});
 });
 
-// form search
-(function search(){
-	var form = document.getElementById('s');
+var JsRocks = function() {
+	'use strict';
 
-	form.addEventListener('submit', function(e) {
-	    form.q.value = form.q.value + ' site:' + window.location.hostname.replace(/www./g, '');
-	});
-})();
+	/**
+	*
+	* DEFINE
+	*
+	**/
+	var	HARMONIC = new Harmonic(),
+			   W = window,
+			   D = document,
+		HOSTNAME = W.location.hostname,
+		PATHNAME = W.location.pathname,
+		  ORIGIN = W.location.origin,
+	INFORMATIONS = {},
+		TEMPLATE = {},
+		 PRIVATE = {},
+		  PUBLIC = this,
+	harmonicInfo = {};
 
-// scrolltop
-(function scrollTop(){
-	var goToTop = document.getElementById('goToTop');
 
-	if (goToTop) {
-		goToTop.addEventListener('click', function(){
-		    $('html, body').animate({scrollTop : 0}, 1000);
-		});
-	}
-})();
-
-// diskus
-(function diskus(id){
-   if(document.getElementById(id)) {
-        var disqus_shortname = 'es6rocks';
-
-        (function() {
-            var dsq = document.createElement('script');
-
-            dsq.type = 'text/javascript';
-            dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    }
-})('#disqus_thread');
-
-// Another post
-(function otherPosts (){
-	var otherPosts = document.getElementById('otherPosts');
-
-	if (otherPosts) {
-		var harmonic = new Harmonic(),
-			posts 	 = harmonic.getPosts(),
-			pathname = window.location.pathname,
-			re 		 = /\/pt-br\//.exec(pathname),
-			reDescription,
-			article  = '',
-			articleCat,
-			linkCat,
-			categoriesLen,
-			category,
-			post;
+	/**
+	*
+	* GET INFORMATIONS
+	*
+	**/
+	INFORMATIONS.lang = function () {
+		var re = /\/pt-br\//.exec(PATHNAME),
+			lang;
 
 		if (re && re[0] === '/pt-br/') {
-			posts = posts['pt-br'];
-			linkCat  = '/categories/pt-br/';
+			lang = 'pt-br';
 		} else {
-			posts = posts['en'];
-			linkCat  = '/categories/';
+			lang = 'en';
 		}
 
-		for (var i = 0; i < 3; i++) {
-			articleCat  = '';
-			post = posts[i];
-			categoriesLen = post.categories.length;
+		return lang;
+	};
 
-			for (var j = 0; j < categoriesLen; j++) {
-				category = post.categories[j].toLowerCase().trim();
-				articleCat += '<li class="item-tag-post"><a href="'+ window.location.origin + linkCat + category +'">' + category + '</a></li>';
-			}
+	INFORMATIONS.categoryPath = function (lang) {
+		var pathCategory;
 
-			reDescription = /<p>/.exec(post.content);
+		switch (lang) {
+			case 'pt-br':
+				pathCategory  = '/categories/pt-br/';
+				break;
+			default:
+				pathCategory  = '/categories/';
+				break;			
+		}
 
-			// DRY
-			if (reDescription && reDescription[0] === '<p>') {
-				console.log('dale');
-				post.content = post.content.replace('<p>', '').replace('</p>', '');
-			} else {
-				console.log('não dale');
-			}
+		return pathCategory;
+	};
+
+
+	/**
+	*
+	* TEMPLATE
+	*
+	**/
+	TEMPLATE.article = function (postLink, date, origin, title, content, category, authorPicture, authorLink, authorName) {
+		var tpl = '';
+
+		tpl += '<article class="col-md-4 col-sm-6 col-xs-12 post-normal item-post post-fade-6">';
+		tpl += '<div class="container-post">';
+		tpl +=     '<aside class="share-post">';
+		tpl +=         '<a href="#" data-provider="https://www.facebook.com/sharer.php?u=" data-post-url="/' + postLink + '" class="share-face share-item" title="Share this post"><img src="/images/icon-face-header.png" alt="icon facebook"></a>';
+		tpl +=         '<a href="#" data-provider="https://twitter.com/intent/tweet?url=" data-post-url="/' + postLink + '" class="share-twitter share-item" title="Tweet this post"><img src="/images/icon-twitter-header.png" alt="icon twitter"></a>';
+		tpl +=     '</aside>';
+		tpl +=     '<div class="date-post">' + date + '</div>';
+		tpl +=     '<h1 class="title-post"><a href="'+ origin + '/' + postLink + '">' + title + '</a></h1>';
+		tpl +=     '<p class="intro-post">' + content + '</p>';
+		tpl +=     '<section class="footer-post">';
+		tpl +=         '<ul class="tags-post">' + category + '</ul>';
+		tpl +=         '<div class="author-post">';
+		tpl +=             '<div class="avatar-author"><img src="' + authorPicture + '" alt="avatar post"></div>';
+		tpl +=             '<div class="info-author">';
+		tpl +=                 '<span>Posted by</span>';
+		tpl +=                 '<a href="' + authorLink + '" class="author">' + authorName + '</a>';
+		tpl +=             '</div>';
+		tpl +=         '</div>';
+		tpl +=     '</section>';
+		tpl += '</div>';
+		tpl += '</article>';
+
+		return tpl;
+	};
+
+	
+	/**
+	*
+	* PRIVATE
+	*
+	**/
+	PRIVATE.googleSearch = function () {
+		var form = D.getElementById('s');
+
+		if (form) {
+			form.addEventListener('submit', function(e) {
+			    form.q.value = form.q.value + ' site:' + HOSTNAME.replace(/www./g, '');
+			});			
+		}
+	};
+
+	PRIVATE.disqus = function (id) {
+	   if (document.getElementById(id)) {
+	        var disqus_shortname = 'es6rocks';
+
+	        (function() {
+	            var dsq = document.createElement('script');
+
+	            dsq.type = 'text/javascript';
+	            dsq.async = true;
+	            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+	            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	        })();
+	    }
+	};
+
+	PRIVATE.shareSocialnetwork = function () {
+		var btns = D.querySelectorAll('.share-item'),
+		    btnLen,
+		    btn;
+
+		if (btns) {
+			btnLen = btns.length;
 			
-			// posts template
-			article += '<article class="col-md-4 col-sm-6 col-xs-12 post-normal item-post post-fade-6">';
-			article += '<div class="container-post">';
-			article +=     '<aside class="share-post">';
-			article +=         '<a href="#" data-provider="https://www.facebook.com/sharer.php?u=" data-post-url="/' + post.link + '" class="share-face share-item" title="Share this post"><img src="/images/icon-face-header.png" alt="icon facebook"></a>';
-			article +=         '<a href="#" data-provider="https://twitter.com/intent/tweet?url=" data-post-url="/' + post.link + '" class="share-twitter share-item" title="Tweet this post"><img src="/images/icon-twitter-header.png" alt="icon twitter"></a>';
-			article +=     '</aside>';
-			article +=     '<div class="date-post">' + post.date + '</div>';
-			article +=     '<h1 class="title-post"><a href="'+ window.location.origin + '/' + post.link + '">' + post.title + '</a></h1>';
-			article +=     '<p class="intro-post">' + post.content + '</p>';
-			article +=     '<section class="footer-post">';
-			article +=         '<ul class="tags-post">' + articleCat + '</ul>';
-			article +=         '<div class="author-post">';
-			article +=             '<div class="avatar-author"><img src="' + post.authorPicture + '" alt="avatar post"></div>';
-			article +=             '<div class="info-author">';
-			article +=                 '<span>Posted by</span>';
-			article +=                 '<a href="' + post.authorLink + '" class="author">' + post.authorName + '</a>';
-			article +=             '</div>';
-			article +=         '</div>';
-			article +=     '</section>';
-			article += '</div>';
-			article += '</article>';
+			for (var i = 0; i < btnLen; i++) {
+			    btn = btns[i];
+			    btn.setAttribute('href', btn.getAttribute('data-provider') + window.location.host + btn.getAttribute('data-post-url'));
+			}
 		}
+	};
 
-		otherPosts.innerHTML = article;
-	}
-})();
+	PRIVATE.otherPosts = function () {
+		var postsContainer = D.getElementById('otherPosts'),
+			article = '',
+			articleCat,
+			post,
+			categoriesLen,
+			category,
+			re;
 
-(function morePosts() {
-	var btnMorePosts = document.getElementById('morePosts'),
-		containerMorePosts = document.getElementById('containerMorePosts'),
-		
-		// DRY
-		harmonic = new Harmonic(),
-		posts 	 = harmonic.getPosts(),
-		pathname = window.location.pathname,
-		re 		 = /\/pt-br\//.exec(pathname),
-		reDescription,
-		article,
-		articleCat,
-		linkCat,
-		categoriesLen,
-		category,
-		post,
+		if (postsContainer) {
+			for (var i = 0; i < 3; i++) {
+				articleCat    = '';
+				post 		  = harmonicInfo.posts[i];
+				categoriesLen = post.categories.length,
+				re = /<p>/.exec(post.content);
 
-		postLen;
-
-	// DRY
-	if (re && re[0] === '/pt-br/') {
-		posts 	= posts['pt-br'];
-		linkCat = '/categories/pt-br/';
-	} else {
-		posts 	= posts['en'];
-		linkCat = '/categories/';
-	}
-
-	posts.splice(0,8);
-
-	if (btnMorePosts && containerMorePosts) {
-
-		btnMorePosts.addEventListener('click', function(){
-			postLen = posts.length;
-			article  = '';
-
-			if (postLen >= 6) {
-				for (var i = 0; i < 6; i++) {
-					articleCat  = '';
-					
-					post = posts[i];
-					categoriesLen = post.categories.length;
-
-					for (var j = 0; j < categoriesLen; j++) {
-						category = post.categories[j].toLowerCase().trim();
-						articleCat += '<li class="item-tag-post"><a href="'+ window.location.origin + linkCat + category +'">' + category + '</a></li>';
-					}
-
-					reDescription = /<p>/.exec(post.content);
-
-					// DRY
-					if (reDescription && reDescription[0] === '<p>') {
-						console.log('dale');
-						post.content = post.content.replace('<p>', '').replace('</p>', '');
-					} else {
-						console.log('não dale');
-					}
-					
-					// posts template
-					article += '<article class="col-md-4 col-sm-6 col-xs-12 post-normal item-post post-fade-6">';
-					article += '<div class="container-post">';
-					article +=     '<aside class="share-post">';
-					article +=         '<a href="#" data-provider="https://www.facebook.com/sharer.php?u=" data-post-url="/' + post.link + '" class="share-face share-item" title="Share this post"><img src="/images/icon-face-header.png" alt="icon facebook"></a>';
-					article +=         '<a href="#" data-provider="https://twitter.com/intent/tweet?url=" data-post-url="/' + post.link + '" class="share-twitter share-item" title="Tweet this post"><img src="/images/icon-twitter-header.png" alt="icon twitter"></a>';
-					article +=     '</aside>';
-					article +=     '<div class="date-post">' + post.date + '</div>';
-					article +=     '<h1 class="title-post"><a href="'+ window.location.origin + '/' + post.link + '">' + post.title + '</a></h1>';
-					article +=     '<p class="intro-post">' + post.content + '</p>';
-					article +=     '<section class="footer-post">';
-					article +=         '<ul class="tags-post">' + articleCat + '</ul>';
-					article +=         '<div class="author-post">';
-					article +=             '<div class="avatar-author"><img src="' + post.authorPicture + '" alt="avatar post"></div>';
-					article +=             '<div class="info-author">';
-					article +=                 '<span>Posted by</span>';
-					article +=                 '<a href="' + post.authorLink + '" class="author">' + post.authorName + '</a>';
-					article +=             '</div>';
-					article +=         '</div>';
-					article +=     '</section>';
-					article += '</div>';
-					article += '</article>';
+				if (re && re[0] === '<p>') {
+					post.content = post.content.replace('<p>', '').replace('</p>', '');
+				}
+				
+				for (var j = 0; j < categoriesLen; j++) {
+				 	category = post.categories[j].toLowerCase().trim();
+				 	articleCat += '<li class="item-tag-post"><a href="'+ ORIGIN + harmonicInfo.categoryPath + category +'">' + category + '</a></li>\n';
 				}
 
-				containerMorePosts.innerHTML = article;
-				posts.splice(0, 6);	
-
-			} else {
-				for (var i = 0; i < postLen; i++) {
-					articleCat  = '';
-					post = posts[i];
-					categoriesLen = post.categories.length;
-
-					for (var j = 0; j < categoriesLen; j++) {
-						category = post.categories[j].toLowerCase().trim();
-						articleCat += '<li class="item-tag-post"><a href="'+ window.location.origin + linkCat + category +'">' + category + '</a></li>';
-					}
-
-					reDescription = /<p>/.exec(post.content);
-
-					// DRY
-					if (reDescription && reDescription[0] === '<p>') {
-						console.log('dale');
-						post.content = post.content.replace('<p>', '').replace('</p>', '');
-					} else {
-						console.log('não dale');
-					}
-					
-					// posts template
-					article += '<article class="col-md-4 col-sm-6 col-xs-12 post-normal item-post post-fade-6">';
-					article += '<div class="container-post">';
-					article +=     '<aside class="share-post">';
-					article +=         '<a href="#" data-provider="https://www.facebook.com/sharer.php?u=" data-post-url="/' + post.link + '" class="share-face share-item" title="Share this post"><img src="/images/icon-face-header.png" alt="icon facebook"></a>';
-					article +=         '<a href="#" data-provider="https://twitter.com/intent/tweet?url=" data-post-url="/' + post.link + '" class="share-twitter share-item" title="Tweet this post"><img src="/images/icon-twitter-header.png" alt="icon twitter"></a>';
-					article +=     '</aside>';
-					article +=     '<div class="date-post">' + post.date + '</div>';
-					article +=     '<h1 class="title-post"><a href="'+ window.location.origin + '/' + post.link + '">' + post.title + '</a></h1>';
-					article +=     '<p class="intro-post">' + post.content + '</p>';
-					article +=     '<section class="footer-post">';
-					article +=         '<ul class="tags-post">' + articleCat + '</ul>';
-					article +=         '<div class="author-post">';
-					article +=             '<div class="avatar-author"><img src="' + post.authorPicture + '" alt="avatar post"></div>';
-					article +=             '<div class="info-author">';
-					article +=                 '<span>Posted by</span>';
-					article +=                 '<a href="' + post.authorLink + '" class="author">' + post.authorName + '</a>';
-					article +=             '</div>';
-					article +=         '</div>';
-					article +=     '</section>';
-					article += '</div>';
-					article += '</article>';
-				}
-
-				containerMorePosts.innerHTML = article;
-				posts.splice(0, postLen);
+				article += TEMPLATE.article(post.link, post.date, ORIGIN, post.title, post.content, articleCat, post.authorPicture, post.authorLink, post.authorName);
 			}
 
-			$('.item-post').addClass('fadeInBox');
-		});
-	}
-})();
+			postsContainer.innerHTML = article;
+		}
+	};
 
-//share socialneytwork
-(function shareSocialnetwork(){
-	var btns = document.querySelectorAll('.share-item'),
-	    btnLen,
-	    btn,
-	    i;
+	PRIVATE.morePosts = function () {
+		var postsContainer = D.getElementById('containerMorePosts'),
+			btnMorePosts = D.getElementById('morePosts'),
+			posts = harmonicInfo.posts,
+			post,
+			article,
+			articleCat,
+			categoriesLen,
+			category,
+			re;
 
-	if (btns) {
-		btnLen = btns.length
-		
-		for (i = 0; i < btnLen; i++) {
-		    btn = btns[i];
-		    btn.setAttribute('href', btn.getAttribute('data-provider') + window.location.host + btn.getAttribute('data-post-url'));
+		posts.splice(0, 4);
+
+		if (postsContainer && btnMorePosts) {
+
+			btnMorePosts.addEventListener('click', function(){
+				article = '';
+
+				if (posts.length >= 6) {
+					for (var i = 0; i < 6; i++) {
+						articleCat    = '';
+						post 		  = posts[i];
+						categoriesLen = post.categories.length,
+						re = /<p>/.exec(post.content);
+
+						if (re && re[0] === '<p>') {
+							post.content = post.content.replace('<p>', '').replace('</p>', '');
+						}
+						
+						for (var j = 0; j < categoriesLen; j++) {
+						 	category = post.categories[j].toLowerCase().trim();
+						 	articleCat += '<li class="item-tag-post"><a href="'+ ORIGIN + harmonicInfo.categoryPath + category +'">' + category + '</a></li>\n';
+						}
+
+						article += TEMPLATE.article(post.link, post.date, ORIGIN, post.title, post.content, articleCat, post.authorPicture, post.authorLink, post.authorName);
+					}
+
+					postsContainer.innerHTML = article;
+					posts.splice(0, 6);	
+				} else {
+
+					for (var i = 0; i < posts.length; i++) {
+						articleCat    = '';
+						post 		  = posts[i];
+						categoriesLen = post.categories.length,
+						re = /<p>/.exec(post.content);
+
+						if (re && re[0] === '<p>') {
+							post.content = post.content.replace('<p>', '').replace('</p>', '');
+						}
+						
+						for (var j = 0; j < categoriesLen; j++) {
+						 	category = post.categories[j].toLowerCase().trim();
+						 	articleCat += '<li class="item-tag-post"><a href="'+ ORIGIN + harmonicInfo.categoryPath + category +'">' + category + '</a></li>\n';
+						}
+
+						article += TEMPLATE.article(post.link, post.date, ORIGIN, post.title, post.content, articleCat, post.authorPicture, post.authorLink, post.authorName);
+					}
+
+					postsContainer.innerHTML = article;
+					posts.splice(0, posts.length);	
+				}
+
+				if (posts.length === 0) {
+					btnMorePosts.style.display = 'none';
+				}
+
+				$('.item-post').addClass('fadeInBox');
+			});
+
 		}
 	}
-})();
+
+
+	/**
+	*
+	* PUBLIC
+	*
+	**/
+	PUBLIC.scrollTop = function (btn, event, posTop, time) {
+		var btn = document.getElementById(btn);
+
+		if (btn) {
+			btn.addEventListener(event, function(){
+			    $('html, body').animate({scrollTop : posTop}, time);
+			});
+		}
+	};
+
+	PUBLIC.init = function (){
+		/**
+		*
+		* HARMONIC INFO SET
+		*
+		**/
+		        harmonicInfo.lang = INFORMATIONS.lang();
+		       harmonicInfo.posts = HARMONIC.getPosts()[harmonicInfo.lang];
+		      harmonicInfo.length = harmonicInfo.posts.length;
+		harmonicInfo.categoryPath = INFORMATIONS.categoryPath(harmonicInfo.lang);
+
+		console.log(harmonicInfo.posts);
+
+
+		/**
+		*
+		* INIT
+		*
+		**/
+		PRIVATE.googleSearch();
+		PRIVATE.otherPosts();
+		PRIVATE.morePosts();
+		PRIVATE.disqus('#disqus_thread');
+		PRIVATE.shareSocialnetwork();
+
+		PUBLIC.scrollTop('goToTop', 'click', 0, 1000);
+	};
+
+	return PUBLIC;
+};
+
+
+var jsrocks = new JsRocks();
+jsrocks.init();
