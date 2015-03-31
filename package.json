@@ -1,6 +1,6 @@
 {
   "name": "harmonic-theme-jsrocks",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "JSROCKS theme",
   "main": "index.js",
   "scripts": {

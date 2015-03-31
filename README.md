@@ -3,5 +3,5 @@ JSRocks Harmonic theme
 
 Install:
 ```bash
-npm install harmonic-theme-default --save
+npm install harmonic-theme-jsrocks --save
 ```
