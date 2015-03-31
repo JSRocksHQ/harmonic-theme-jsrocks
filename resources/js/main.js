@@ -219,8 +219,6 @@ var JsRocks = function() {
 			category,
 			re;
 
-		console.log(posts);
-
 		if (PAGE === 'home' && posts.length > 8) {
 			posts.splice(0, 8);
 		} else {
