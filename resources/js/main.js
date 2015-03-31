@@ -53,8 +53,10 @@ var JsRocks = function() {
 		HOSTNAME = W.location.hostname,
 		PATHNAME = W.location.pathname,
 		  ORIGIN = W.location.origin,
+		  PAGE   = D.querySelectorAll('body')[0].getAttribute('data-page'),
 	INFORMATIONS = {},
 		TEMPLATE = {},
+		 JSROCKS = {},
 		 PRIVATE = {},
 		  PUBLIC = this,
 	harmonicInfo = {};
@@ -217,7 +219,13 @@ var JsRocks = function() {
 			category,
 			re;
 
-		posts.splice(0, 4);
+		console.log(posts);
+
+		if (PAGE === 'home' && posts.length > 8) {
+			posts.splice(0, 8);
+		} else {
+			btnMorePosts.style.display = 'none';
+		}
 
 		if (postsContainer && btnMorePosts) {
 
@@ -305,9 +313,6 @@ var JsRocks = function() {
 		       harmonicInfo.posts = HARMONIC.getPosts()[harmonicInfo.lang];
 		      harmonicInfo.length = harmonicInfo.posts.length;
 		harmonicInfo.categoryPath = INFORMATIONS.categoryPath(harmonicInfo.lang);
-
-		console.log(harmonicInfo.posts);
-
 
 		/**
 		*
