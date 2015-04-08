@@ -327,7 +327,7 @@ var JsRocks = function() {
 				for (var j = 0; j < categoryListLen; j++) {
 					category = categoryList[j];					
 					dataCategory = category.getAttribute('data-post-category').trim().toLowerCase();
-					
+			
 					str += TEMPLATE.category(categoryPath, dataCategory);
 				}
 
@@ -367,15 +367,13 @@ var JsRocks = function() {
 		*
 		**/
 		PRIVATE.googleSearch();
+		PRIVATE.atrCategory(jsrocks.categoryPath);
 		PRIVATE.otherPosts();
 		PRIVATE.morePosts();
 		PRIVATE.disqus('#disqus_thread');
 		PRIVATE.shareSocialnetwork();
 
 		PUBLIC.scrollTop('goToTop', 'click', 0, 1000);
-
-		// test
-		PRIVATE.atrCategory(jsrocks.categoryPath);
 	};
 
 	return PUBLIC;
