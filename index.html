@@ -47,7 +47,7 @@
     
     <title>JS Rocks</title>
 </head>
-<body data-page="home">
+<body>
     <div class="wrapper">
         {% include "partials/header.html" %}
 
@@ -74,7 +74,7 @@
                                     <section class="footer-post">
                                         <ul class="tags-post">
                                              {% for category in post.categories %}
-                                                <li class="item-tag-post"><a href="/categories/{% if post.metadata.default_lang %}{{ post.metadata.lang }}/{% endif %}{{ category | lower | trim }}">{{ category }}</a></li>
+                                                <li class="item-tag-post" data-post-category="{{ category }}">aa</li>
                                             {% endfor %}
                                         </ul>
                                         <div class="author-post">
