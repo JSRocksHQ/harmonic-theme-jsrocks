@@ -6,16 +6,16 @@
 
     <!-- Responsive Meta Data -->
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> <!--  site com responsivo / comente caso contrário-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     <!-- Core Meta Data -->
-    <meta name="author" content="@italowaxman">
+    <meta name="author" content="@italowaxman, @robsongajunior, @jaydson">
     <meta name="description" content="A collaborative website about the Javascript, ECMAScript sixth edition, a.k.a. ES6, Harmonic and others.">
     <meta name="keywords" content="javascript, JS, ECMAScript, ES6, Harmonic, front-end">
 
     <!-- Facebook Tags -->
     <meta property="og:description" content="A collaborative website about the Javascript, ECMAScript sixth edition, a.k.a. ES6, Harmonic and others.">
-    <meta property="og:image" content="/images/thumb_face.png">
+    <meta property="og:image" content="/images/thumb.png">
     <meta property="og:site_name" content="JS Rocks">
     <meta property="og:title" content="JS Rocks">
     <meta property="og:type" content="website">
@@ -27,15 +27,15 @@
     <meta name="twitter:creator" content="Usuário do Twitter">
     <meta name="twitter:title" content="JS Rocks">
     <meta name="twitter:description" content="A collaborative website about the Javascript, ECMAScript sixth edition, a.k.a. ES6, Harmonic and others.">
-    <meta name="twitter:image" content="assetes/images/thumb_face.png">
+    <meta name="twitter:image" content="/images/thumb.png">
 
     <!-- Humans -->
-    <link rel="author" href="humans.txt" />
+    <link rel="author" href="/AUTHORS" />
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="favicon.png" type="image/png">
-    <link rel="shortcut icon" href="Endereço do arquivo/favicon.png" type="image/png"> <!-- link absoluto do favicon -->
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/png">
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/png">
 
     <link rel="stylesheet" href="/css/vendor/prism.css"/>    
     <link rel="stylesheet" href="/css/vendor/normalize.css">
@@ -47,7 +47,7 @@
     
     <title>JS Rocks</title>
 </head>
-<body data-page="home">
+<body>
     <div class="wrapper">
         {% include "partials/header.html" %}
 
@@ -70,11 +70,14 @@
                                     </aside>
                                     <div class="date-post">{{ post.date }}</div>
                                     <h1 class="title-post"><a href="/{{ post.link }}" alt="{{ post.title }}">{{ post.title }}</a></h1>
-                                    <p class="intro-post">Among so many great new features in ES6, Arrow Functions(or Fat Arrow Functions) is one that desirves attention! It is not just awesome, it's also great to work with scopes, shortcuts some tecniques ...</p>
+                                    
+                                    <div class="intro-post"> {{post.content}} </div>
+                                    
+
                                     <section class="footer-post">
                                         <ul class="tags-post">
-                                             {% for category in post.categories %}
-                                                <li class="item-tag-post"><a href="/categories/{% if post.metadata.default_lang %}{{ post.metadata.lang }}/{% endif %}{{ category | lower | trim }}">{{ category }}</a></li>
+                                            {% for category in post.categories %}
+                                                <li class="item-tag-post" data-post-category="{{ category }}"></li>
                                             {% endfor %}
                                         </ul>
                                         <div class="author-post">

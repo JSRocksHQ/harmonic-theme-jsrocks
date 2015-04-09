@@ -48,18 +48,18 @@ var JsRocks = function() {
 	*
 	**/
 	var	HARMONIC = new Harmonic(),
-			   W = window,
-			   D = document,
+		W = window,
+		D = document,
+		HOST = W.location.host,
 		HOSTNAME = W.location.hostname,
 		PATHNAME = W.location.pathname,
-		  ORIGIN = W.location.origin,
-		  PAGE   = D.querySelectorAll('body')[0].getAttribute('data-page'),
-	INFORMATIONS = {},
+		ORIGIN = W.location.origin,
+		INFORMATIONS = {},
 		TEMPLATE = {},
-		 JSROCKS = {},
-		 PRIVATE = {},
-		  PUBLIC = this,
-	harmonicInfo = {};
+		JSROCKS = {},
+		PRIVATE = {},
+		PUBLIC = this,
+		jsrocks = {};
 
 
 	/**
@@ -71,10 +71,13 @@ var JsRocks = function() {
 		var re = /\/pt-br\//.exec(PATHNAME),
 			lang;
 
-		if (re && re[0] === '/pt-br/') {
-			lang = 'pt-br';
-		} else {
-			lang = 'en';
+		switch (re && re[0]) {
+			case '/pt-br/':
+				lang = 'pt-br';
+				break;
+			default:
+				lang = 'en';
+				break;			
 		}
 
 		return lang;
@@ -112,7 +115,7 @@ var JsRocks = function() {
 		tpl +=     '</aside>';
 		tpl +=     '<div class="date-post">' + date + '</div>';
 		tpl +=     '<h1 class="title-post"><a href="'+ origin + '/' + postLink + '">' + title + '</a></h1>';
-		tpl +=     '<p class="intro-post">' + content + '</p>';
+		tpl +=     '<div class="intro-post">' + content + '</div>';
 		tpl +=     '<section class="footer-post">';
 		tpl +=         '<ul class="tags-post">' + category + '</ul>';
 		tpl +=         '<div class="author-post">';
@@ -125,6 +128,16 @@ var JsRocks = function() {
 		tpl +=     '</section>';
 		tpl += '</div>';
 		tpl += '</article>';
+
+		return tpl;
+	};
+
+	TEMPLATE.category = function (categoryPath, dataCategory) {
+		var tpl = '';
+
+		tpl += '<li class="item-tag-post">';
+		tpl +=     '<a href="' + categoryPath + dataCategory + '">' + dataCategory + '</a>';
+		tpl += '</li>';
 
 		return tpl;
 	};
@@ -162,16 +175,19 @@ var JsRocks = function() {
 	};
 
 	PRIVATE.shareSocialnetwork = function () {
-		var btns = D.querySelectorAll('.share-item'),
-		    btnLen,
-		    btn;
+		var btnList = D.querySelectorAll('.share-item'),
+			btnLen = btnList.length,
+			btn,
+			postUrl,
+			providerUrl;		
 
-		if (btns) {
-			btnLen = btns.length;
-			
+		if (!!btnLen) {
 			for (var i = 0; i < btnLen; i++) {
-			    btn = btns[i];
-			    btn.setAttribute('href', btn.getAttribute('data-provider') + window.location.host + btn.getAttribute('data-post-url'));
+				btn = btnList[i];
+			    postUrl = btn.getAttribute('data-post-url');
+			    providerUrl = btn.getAttribute('data-provider');
+
+			    btn.setAttribute('href', providerUrl + HOST + postUrl);
 			}
 		}
 	};
@@ -182,23 +198,17 @@ var JsRocks = function() {
 			articleCat,
 			post,
 			categoriesLen,
-			category,
-			re;
+			category;
 
 		if (postsContainer) {
 			for (var i = 0; i < 3; i++) {
 				articleCat    = '';
-				post 		  = harmonicInfo.posts[i];
-				categoriesLen = post.categories.length,
-				re = /<p>/.exec(post.content);
+				post 		  = jsrocks.posts[i];
+				categoriesLen = post.categories.length;
 
-				if (re && re[0] === '<p>') {
-					post.content = post.content.replace('<p>', '').replace('</p>', '');
-				}
-				
 				for (var j = 0; j < categoriesLen; j++) {
 				 	category = post.categories[j].toLowerCase().trim();
-				 	articleCat += '<li class="item-tag-post"><a href="'+ ORIGIN + harmonicInfo.categoryPath + category +'">' + category + '</a></li>\n';
+				 	articleCat += '<li class="item-tag-post"><a href="'+ ORIGIN + jsrocks.categoryPath + category +'">' + category + '</a></li>\n';
 				}
 
 				article += TEMPLATE.article(post.link, post.date, ORIGIN, post.title, post.content, articleCat, post.authorPicture, post.authorLink, post.authorName);
@@ -211,19 +221,14 @@ var JsRocks = function() {
 	PRIVATE.morePosts = function () {
 		var postsContainer = D.getElementById('containerMorePosts'),
 			btnMorePosts = D.getElementById('morePosts'),
-			posts = harmonicInfo.posts,
+			posts = jsrocks.posts,
 			post,
 			article,
 			articleCat,
 			categoriesLen,
-			category,
-			re;
+			category;
 
-		if (PAGE === 'home' && posts.length > 8) {
-			posts.splice(0, 8);
-		} else {
-			btnMorePosts.style.display = 'none';
-		}
+		posts.splice(0, 8);
 
 		if (postsContainer && btnMorePosts) {
 
@@ -234,16 +239,11 @@ var JsRocks = function() {
 					for (var i = 0; i < 6; i++) {
 						articleCat    = '';
 						post 		  = posts[i];
-						categoriesLen = post.categories.length,
-						re = /<p>/.exec(post.content);
+						categoriesLen = post.categories.length;
 
-						if (re && re[0] === '<p>') {
-							post.content = post.content.replace('<p>', '').replace('</p>', '');
-						}
-						
 						for (var j = 0; j < categoriesLen; j++) {
 						 	category = post.categories[j].toLowerCase().trim();
-						 	articleCat += '<li class="item-tag-post"><a href="'+ ORIGIN + harmonicInfo.categoryPath + category +'">' + category + '</a></li>\n';
+						 	articleCat += '<li class="item-tag-post"><a href="'+ ORIGIN + jsrocks.categoryPath + category +'">' + category + '</a></li>\n';
 						}
 
 						article += TEMPLATE.article(post.link, post.date, ORIGIN, post.title, post.content, articleCat, post.authorPicture, post.authorLink, post.authorName);
@@ -256,16 +256,11 @@ var JsRocks = function() {
 					for (var i = 0; i < posts.length; i++) {
 						articleCat    = '';
 						post 		  = posts[i];
-						categoriesLen = post.categories.length,
-						re = /<p>/.exec(post.content);
-
-						if (re && re[0] === '<p>') {
-							post.content = post.content.replace('<p>', '').replace('</p>', '');
-						}
+						categoriesLen = post.categories.length;
 						
 						for (var j = 0; j < categoriesLen; j++) {
 						 	category = post.categories[j].toLowerCase().trim();
-						 	articleCat += '<li class="item-tag-post"><a href="'+ ORIGIN + harmonicInfo.categoryPath + category +'">' + category + '</a></li>\n';
+						 	articleCat += '<li class="item-tag-post"><a href="'+ ORIGIN + jsrocks.categoryPath + category +'">' + category + '</a></li>\n';
 						}
 
 						article += TEMPLATE.article(post.link, post.date, ORIGIN, post.title, post.content, articleCat, post.authorPicture, post.authorLink, post.authorName);
@@ -285,6 +280,38 @@ var JsRocks = function() {
 		}
 	}
 
+	PRIVATE.atrCategory = function (categoryPath) {
+		var containerList = D.querySelectorAll('.tags-post'),
+			containerListLen = containerList.length,
+			container,
+			
+			// category
+			categoryList,
+			categoryListLen,
+			category,
+			dataCategory,
+
+			// str to write
+			str;
+
+		if (!!containerListLen) {
+			for (var i = 0; i < containerListLen ; i++) {
+				str = '';
+				container = containerList[i];
+				categoryList = container.querySelectorAll('.item-tag-post');
+				categoryListLen = categoryList.length;
+
+				for (var j = 0; j < categoryListLen; j++) {
+					category = categoryList[j];					
+					dataCategory = category.getAttribute('data-post-category').trim().toLowerCase();
+			
+					str += TEMPLATE.category(categoryPath, dataCategory);
+				}
+
+				container.innerHTML = str;
+			}
+		}
+	};
 
 	/**
 	*
@@ -301,16 +328,15 @@ var JsRocks = function() {
 		}
 	};
 
-	PUBLIC.init = function (){
+	PUBLIC.init = function () {
 		/**
 		*
 		* HARMONIC INFO SET
 		*
 		**/
-		        harmonicInfo.lang = INFORMATIONS.lang();
-		       harmonicInfo.posts = HARMONIC.getPosts()[harmonicInfo.lang];
-		      harmonicInfo.length = harmonicInfo.posts.length;
-		harmonicInfo.categoryPath = INFORMATIONS.categoryPath(harmonicInfo.lang);
+		jsrocks.lang = INFORMATIONS.lang();
+		jsrocks.posts = HARMONIC.getPosts()[jsrocks.lang];
+		jsrocks.categoryPath = INFORMATIONS.categoryPath(jsrocks.lang);
 
 		/**
 		*
@@ -318,6 +344,7 @@ var JsRocks = function() {
 		*
 		**/
 		PRIVATE.googleSearch();
+		PRIVATE.atrCategory(jsrocks.categoryPath);
 		PRIVATE.otherPosts();
 		PRIVATE.morePosts();
 		PRIVATE.disqus('#disqus_thread');
@@ -330,5 +357,5 @@ var JsRocks = function() {
 };
 
 
-var jsrocks = new JsRocks();
-jsrocks.init();
+var jsRocks = new JsRocks();
+jsRocks.init();
