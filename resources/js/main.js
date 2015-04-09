@@ -75,9 +75,6 @@ var JsRocks = function() {
 			case '/pt-br/':
 				lang = 'pt-br';
 				break;
-			// case '/cn/':
-			// 	lang = 'cn';
-			// 	break;
 			default:
 				lang = 'en';
 				break;			
@@ -93,9 +90,6 @@ var JsRocks = function() {
 			case 'pt-br':
 				pathCategory  = '/categories/pt-br/';
 				break;
-			// case 'cn':
-			// 	pathCategory  = '/categories/cn/';
-			// 	break;
 			default:
 				pathCategory  = '/categories/';
 				break;			
@@ -121,7 +115,7 @@ var JsRocks = function() {
 		tpl +=     '</aside>';
 		tpl +=     '<div class="date-post">' + date + '</div>';
 		tpl +=     '<h1 class="title-post"><a href="'+ origin + '/' + postLink + '">' + title + '</a></h1>';
-		tpl +=     '<p class="intro-post">' + content + '</p>';
+		tpl +=     '<div class="intro-post">' + content + '</div>';
 		tpl +=     '<section class="footer-post">';
 		tpl +=         '<ul class="tags-post">' + category + '</ul>';
 		tpl +=         '<div class="author-post">';
@@ -204,20 +198,14 @@ var JsRocks = function() {
 			articleCat,
 			post,
 			categoriesLen,
-			category,
-			re;
+			category;
 
 		if (postsContainer) {
 			for (var i = 0; i < 3; i++) {
 				articleCat    = '';
 				post 		  = jsrocks.posts[i];
-				categoriesLen = post.categories.length,
-				re = /<p>/.exec(post.content);
+				categoriesLen = post.categories.length;
 
-				if (re && re[0] === '<p>') {
-					post.content = post.content.replace('<p>', '').replace('</p>', '');
-				}
-				
 				for (var j = 0; j < categoriesLen; j++) {
 				 	category = post.categories[j].toLowerCase().trim();
 				 	articleCat += '<li class="item-tag-post"><a href="'+ ORIGIN + jsrocks.categoryPath + category +'">' + category + '</a></li>\n';
@@ -238,8 +226,7 @@ var JsRocks = function() {
 			article,
 			articleCat,
 			categoriesLen,
-			category,
-			re;
+			category;
 
 		posts.splice(0, 8);
 
@@ -252,13 +239,8 @@ var JsRocks = function() {
 					for (var i = 0; i < 6; i++) {
 						articleCat    = '';
 						post 		  = posts[i];
-						categoriesLen = post.categories.length,
-						re = /<p>/.exec(post.content);
+						categoriesLen = post.categories.length;
 
-						if (re && re[0] === '<p>') {
-							post.content = post.content.replace('<p>', '').replace('</p>', '');
-						}
-						
 						for (var j = 0; j < categoriesLen; j++) {
 						 	category = post.categories[j].toLowerCase().trim();
 						 	articleCat += '<li class="item-tag-post"><a href="'+ ORIGIN + jsrocks.categoryPath + category +'">' + category + '</a></li>\n';
@@ -274,12 +256,7 @@ var JsRocks = function() {
 					for (var i = 0; i < posts.length; i++) {
 						articleCat    = '';
 						post 		  = posts[i];
-						categoriesLen = post.categories.length,
-						re = /<p>/.exec(post.content);
-
-						if (re && re[0] === '<p>') {
-							post.content = post.content.replace('<p>', '').replace('</p>', '');
-						}
+						categoriesLen = post.categories.length;
 						
 						for (var j = 0; j < categoriesLen; j++) {
 						 	category = post.categories[j].toLowerCase().trim();

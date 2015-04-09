@@ -393,7 +393,7 @@ header{
     background: #2bb0c8;
 }
 .date-post,
-.intro-post,
+.intro-post p,
 .info-author span{
     font-family: georgia;
     font-size:1.2em;

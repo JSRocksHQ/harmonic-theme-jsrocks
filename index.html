@@ -70,7 +70,10 @@
                                     </aside>
                                     <div class="date-post">{{ post.date }}</div>
                                     <h1 class="title-post"><a href="/{{ post.link }}" alt="{{ post.title }}">{{ post.title }}</a></h1>
-                                    <p class="intro-post">Among so many great new features in ES6, Arrow Functions(or Fat Arrow Functions) is one that desirves attention! It is not just awesome, it's also great to work with scopes, shortcuts some tecniques ...</p>
+                                    
+                                    <div class="intro-post"> {{post.content}} </div>
+                                    
+
                                     <section class="footer-post">
                                         <ul class="tags-post">
                                             {% for category in post.categories %}
