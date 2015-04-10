@@ -1,7 +1,7 @@
 {
   "name": "harmonic-theme-jsrocks",
-  "version": "0.0.3",
-  "description": "JSROCKS theme",
+  "version": "0.0.4",
+  "description": "JSROCKS Harmonic theme",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,10 +10,27 @@
     "type": "git",
     "url": "https://github.com/es6rocks/harmonic-theme-jsrocks.git"
   },
-  "author": "Robson Júnior",
+  "author": "Robson Júnior <robson.ga.junior@gmail.com> (http://robsonjunior.cc)",
+  "contributors": ["Jaydson Gomes <jayalemao@gmail.com> (http://jaydson.org)"],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/es6rocks/harmonic-theme-jsrocks/issues"
   },
-  "homepage": "https://github.com/es6rocks/harmonic-theme-jsrocks"
+  "homepage": "https://github.com/es6rocks/harmonic-theme-jsrocks",
+  "keywords": [
+    "harmonic",
+    "ssg",
+    "generator",
+    "blog",
+    "scaffold",
+    "markdown",
+    "website",
+    "static",
+    "static generator",
+    "static site generator",
+    "ES6",
+    "ES7",
+    "ES2015",
+    "ES2016"
+  ]
 }
