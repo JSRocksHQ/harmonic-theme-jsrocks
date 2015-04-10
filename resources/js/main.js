@@ -330,11 +330,7 @@ var JsRocks = function() {
 			container = D.querySelectorAll('.list-tags');
 
 		if (!!container.length) {
-			console.log('Entrou no if');
-
 			for (var i = 0; i < arrLen ; i++) {
-				console.log('Loop');
-
 				str += TEMPLATE.popularTag(arr[i]);
 			}
 
