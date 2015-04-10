@@ -1,5 +1,4 @@
-$(document).ready(function() {     
-	
+$(document).ready(function() {	
 	//Animations Timing
 	setTimeout(function() { $(".logo").addClass("fadeIn")}, 100);
 
@@ -41,6 +40,7 @@ $(document).ready(function() {
 
 var JsRocks = function() {
 	'use strict';
+
 
 	/**
 	*
@@ -128,6 +128,16 @@ var JsRocks = function() {
 		tpl +=     '</section>';
 		tpl += '</div>';
 		tpl += '</article>';
+
+		return tpl;
+	};
+
+	TEMPLATE.popularTag = function (tag) {
+		var tpl = '';
+
+		tpl += '<li class="item-list-tag">';
+		tpl +=     '<a href="' + jsrocks.categoryPath + tag + '">' + tag + '</a>';
+		tpl += '</li>';
 
 		return tpl;
 	};
@@ -313,6 +323,22 @@ var JsRocks = function() {
 		}
 	};
 
+	PRIVATE.popularTag = function () {
+		var arr = ['modules' ,'scope', 'es6'],
+			arrLen = arr.length,
+			str = '',
+			container = D.querySelectorAll('.list-tags');
+
+		if (!!container.length) {
+			for (var i = 0; i < arrLen ; i++) {
+				str += TEMPLATE.popularTag(arr[i]);
+			}
+
+			container[0].innerHTML = str;
+		}
+	};
+
+
 	/**
 	*
 	* PUBLIC
@@ -343,6 +369,7 @@ var JsRocks = function() {
 		* INIT
 		*
 		**/
+		PRIVATE.popularTag();
 		PRIVATE.googleSearch();
 		PRIVATE.atrCategory(jsrocks.categoryPath);
 		PRIVATE.otherPosts();
