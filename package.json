@@ -2,7 +2,9 @@
   "name": "harmonic-theme-jsrocks",
   "version": "0.0.4",
   "description": "JSROCKS Harmonic theme",
-  "main": "index.js",
+  "keywords": [
+    "harmonictheme"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
