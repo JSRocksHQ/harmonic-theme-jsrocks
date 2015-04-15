@@ -1,5 +1,5 @@
 # harmonic-theme-jsrocks
-JSRocks Harmonic theme
+JSRocks [Harmonic](https://github.com/es6rocks/harmonic) theme
 
 Install:
 ```bash
