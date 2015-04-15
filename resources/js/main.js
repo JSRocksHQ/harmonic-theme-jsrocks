@@ -41,7 +41,6 @@ $(document).ready(function() {
 var JsRocks = function() {
 	'use strict';
 
-
 	/**
 	*
 	* DEFINE
@@ -59,7 +58,15 @@ var JsRocks = function() {
 		JSROCKS = {},
 		PRIVATE = {},
 		PUBLIC = this,
-		jsrocks = {};
+		jsrocks = {},
+		pageElements = {};
+
+	/**
+	*
+	* DEFINE ELEMENTS
+	*
+	**/
+	pageElements.btnMorePosts = D.getElementById('morePosts');
 
 
 	/**
@@ -77,7 +84,7 @@ var JsRocks = function() {
 				break;
 			default:
 				lang = 'en';
-				break;			
+				break;
 		}
 
 		return lang;
@@ -92,7 +99,7 @@ var JsRocks = function() {
 				break;
 			default:
 				pathCategory  = '/categories/';
-				break;			
+				break;
 		}
 
 		return pathCategory;
@@ -230,7 +237,6 @@ var JsRocks = function() {
 
 	PRIVATE.morePosts = function () {
 		var postsContainer = D.getElementById('containerMorePosts'),
-			btnMorePosts = D.getElementById('morePosts'),
 			posts = jsrocks.posts,
 			post,
 			article,
@@ -240,9 +246,9 @@ var JsRocks = function() {
 
 		posts.splice(0, 8);
 
-		if (postsContainer && btnMorePosts) {
+		if (postsContainer && pageElements.btnMorePosts) {
 
-			btnMorePosts.addEventListener('click', function(){
+			pageElements.btnMorePosts.addEventListener('click', function(){
 				article = '';
 
 				if (posts.length >= 6) {
@@ -267,7 +273,7 @@ var JsRocks = function() {
 						articleCat    = '';
 						post 		  = posts[i];
 						categoriesLen = post.categories.length;
-						
+
 						for (var j = 0; j < categoriesLen; j++) {
 						 	category = post.categories[j].toLowerCase().trim();
 						 	articleCat += '<li class="item-tag-post"><a href="'+ ORIGIN + jsrocks.categoryPath + category +'">' + category + '</a></li>\n';
@@ -281,7 +287,7 @@ var JsRocks = function() {
 				}
 
 				if (posts.length === 0) {
-					btnMorePosts.style.display = 'none';
+					pageElements.btnMorePosts.style.display = 'none';
 				}
 
 				$('.item-post').addClass('fadeInBox');
@@ -312,9 +318,9 @@ var JsRocks = function() {
 				categoryListLen = categoryList.length;
 
 				for (var j = 0; j < categoryListLen; j++) {
-					category = categoryList[j];					
+					category = categoryList[j];
 					dataCategory = category.getAttribute('data-post-category').trim().toLowerCase();
-			
+
 					str += TEMPLATE.category(categoryPath, dataCategory);
 				}
 
@@ -369,6 +375,10 @@ var JsRocks = function() {
 		* INIT
 		*
 		**/
+		if (pageElements.btnMorePosts && PATHNAME.match(/categories/gi)) {
+			pageElements.btnMorePosts.style.display = 'none';
+		}
+
 		PRIVATE.popularTag();
 		PRIVATE.googleSearch();
 		PRIVATE.atrCategory(jsrocks.categoryPath);
@@ -378,6 +388,7 @@ var JsRocks = function() {
 		PRIVATE.shareSocialnetwork();
 
 		PUBLIC.scrollTop('goToTop', 'click', 0, 1000);
+
 	};
 
 	return PUBLIC;
