@@ -104,13 +104,11 @@ textarea {
     font-style: normal;
 
 }
-
-html, body {
+*{
     margin: 0;
     padding: 0;
     list-style: none;
     outline: none;
-    font-family: 'cocogooseregular';
     font-size: 10px;
     color: #000;
     transition: all 350ms ease 0s;
@@ -118,9 +116,12 @@ html, body {
 h1,h2,h3,h4,h5{
     font-weight: lighter;
 }
-body{
+
+html,
+body {
+    font-family: 'cocogooseregular';
     background: #000;
-    overflow-x:hidden; 
+    overflow-x:hidden;
 }
 header{
     background: url(/images/bg-header-2.jpg) no-repeat center top;
