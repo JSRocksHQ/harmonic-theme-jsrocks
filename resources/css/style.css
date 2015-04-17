@@ -116,13 +116,20 @@ h1,h2,h3,h4,h5{
     font-weight: lighter;
 }
 
+body {
+    overflow:hidden;
+}
+
+html {
+    overflow: auto;
+}
+
 html,
 body {
     font-family: 'cocogooseregular';
     font-size: 10px;
     color: #000;
     background: #000;
-    overflow-x:hidden;
 }
 header{
     background: url(/images/bg-header-2.jpg) no-repeat center top;
