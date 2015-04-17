@@ -135,11 +135,6 @@ header{
     width: 100%;
     height: 530px;
     padding-top: 20px;
-
-    -webkit-background-size: 100% auto;
-    -moz-background-size: 100% auto;
-    -o-background-size: 100% auto;
-    background-size: 100% auto;
 }
 code[class*="language-"], pre[class*="language-"] {
     font-size: 14px;
