@@ -109,17 +109,18 @@ textarea {
     padding: 0;
     list-style: none;
     outline: none;
-    font-size: 10px;
-    color: #000;
     transition: all 350ms ease 0s;
 }
 h1,h2,h3,h4,h5{
+    font-family: cocogooseregular;
     font-weight: lighter;
 }
 
 html,
 body {
     font-family: 'cocogooseregular';
+    font-size: 10px;
+    color: #000;
     background: #000;
     overflow-x:hidden;
 }
@@ -133,6 +134,9 @@ header{
     -moz-background-size: 100% auto;
     -o-background-size: 100% auto;
     background-size: 100% auto;
+}
+code[class*="language-"], pre[class*="language-"] {
+    font-size: 14px;
 }
 .item-flag{
     float: left;
@@ -316,7 +320,7 @@ header{
    font-style: italic;
    color: #fdcf0b;
    font-size: 1.1em;
-} 
+}
 .popular-tags{
     float: left;
     margin-top: -10px;
@@ -372,7 +376,7 @@ header{
     background: #fdcf0b;
     padding: 40px;
     position: relative;
-    overflow: hidden; 
+    overflow: hidden;
     border-radius: 5px;
 }
 .post-big .container-post{
@@ -784,6 +788,8 @@ footer{
     border-radius:5px;
     padding: 35px;
     height: auto;
+    font-size: 1.6em;
+    font-family: Verdana, Sans-Serif;
 }
 .article-content iframe {
     display: block;
@@ -800,16 +806,11 @@ footer{
     top: 35px;
 }
 .article-content p{
-    font-size: 1.8em;
-    font-family: georgia;
-    font-style: italic;
-    margin:1em 0;
+    margin: 1em 0;
 }
 .article-content p a{
     color: #e5b900;
     text-decoration: underline;
-    font-size: 100%;
-    font-family: georgia;
 }
 .article-content p a:hover{
     text-decoration: none;
@@ -820,20 +821,13 @@ footer{
 }
 .article-content p em{
     font-style: italic;
-    font-family: georgia;
-    font-size: 100%;
-    color: #7c7c7c;
 }
 .article-content li{
-    font-family: georgia;
     list-style: initial;
     margin-left: 40px;
 }
 .article-content strong{
     font-weight: bold;
-    font-family: georgia;
-    font-size: 100%;
-    font-style: italic;
 }
 .title-article-content{
     text-transform: uppercase;
