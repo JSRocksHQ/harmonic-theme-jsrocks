@@ -415,6 +415,13 @@ code[class*="language-"], pre[class*="language-"] {
 .intro-post{
     line-height: 16px;
 }
+.intro-post a {
+    color: #000;
+    text-decoration: underline;
+}
+.intro-post a:hover {
+    text-decoration: none;
+}
 .post-big .title-post {
     font-size: 4.8em;
     margin: 20px auto 15px;
