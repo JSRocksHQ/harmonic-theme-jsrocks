@@ -6,7 +6,7 @@
 
     <!-- Responsive Meta Data -->
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     <!-- Core Meta Data -->
     <meta name="author" content="@italowaxman, @robsongajunior, @jaydson">
@@ -46,21 +46,19 @@
     <link rel="stylesheet" href="/css/animations.css">
 
     <title>{% block title %}{{ config.title }} - {{ config.subtitle }}{% endblock %}</title>
-
 </head>
-
 <body>
-     <div class="wrapper">
+    <div class="wrapper">
         {% include "partials/header.html" %}
 
         <div class="content">
             <div class="container">
                 {% block content %}
                 {% endblock %}
-            </div>     
+            </div>
         </div>
 
-        {% include "partials/footer.html" %}   
+        {% include "partials/footer.html" %}
     </div>
 
     {% include "partials/scripts.html" %}
