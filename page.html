@@ -1,68 +1,10 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+{% extends "layout.html" %}
 
-    <!-- Responsive Meta Data -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> 
-
-    <!-- Core Meta Data -->
-    <meta name="author" content="@italowaxman, @robsongajunior, @jaydson">
-    <meta name="description" content="A collaborative website about the latest JavaScript features and tools.">
-    <meta name="keywords" content="javascript, JS, ECMAScript, ES6, Harmonic, front-end">
-
-    <!-- Facebook Tags -->
-    <meta property="og:description" content="A collaborative website about the latest JavaScript features and tools.">
-    <meta property="og:image" content="http://jsrocks.org/images/thumb.png">
-    <meta property="og:site_name" content="JS Rocks">
-    <meta property="og:title" content="JS Rocks">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="http://jsrocks.org">
-
-    <!-- Twitter tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="http://jsrocks.org">
-    <meta name="twitter:creator" content="Usuário do Twitter">
-    <meta name="twitter:title" content="JS Rocks">
-    <meta name="twitter:description" content="A collaborative website about the latest JavaScript features and tools.">
-    <meta name="twitter:image" content="http://jsrocks.org/images/thumb.png">
-
-    <!-- Humans -->
-    <link rel="author" href="/AUTHORS" />
-
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="http://jsrocks.org/favicon.ico">
-    <link rel="apple-touch-icon image_src" href="http://jsrocks.org/favicon.png">
+{% block title %}
+404: Not Found!
+{% endblock %}
 
 
-    <link rel="stylesheet" href="/css/vendor/prism.css"/>
-    <link rel="stylesheet" href="/css/vendor/normalize.css">
-    <link rel="stylesheet" href="/css/vendor/bootstrap.css">
-    <link rel="stylesheet" href="/css/vendor/bootstrap-theme.css">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/responsive.css">
-    <link rel="stylesheet" href="/css/animations.css">
-
-    <title>404: Not Found!</title>
-</head>
-<body>
-	<div class="wrapper">
-		{% include "partials/header.html" %}
-
-		<div class="content">
-			<div class="container">
-				<h2>404: Not Found!</h2>
-			</div>
-		</div>
-	{% include "partials/footer.html" %}
-	</div>
-
-	{% include "partials/scripts.html" %}
-<body>
-
-</body>
-</html>
-</body>
-</html>
+{% block content %}
+<h2>404: Not Found!</h2>
+{% endblock %}
