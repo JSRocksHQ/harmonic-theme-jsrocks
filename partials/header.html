@@ -4,7 +4,7 @@
             <div class="col-sm-2 col-xs-12 flags-list">
                 <div>
                     {% for flag in config.i18n.languages %}
-                        <a  class="item-flag" href="{% if flag ==  config.i18n.default %}/ {% else %}/{{ flag }}{% endif %}">
+                        <a  class="item-flag" href="{% if flag ==  config.i18n.default %}/{% else %}/{{ flag }}{% endif %}">
                             <img src="/images/flag-{{ flag }}.png">
                         </a>
                     {% endfor %}
