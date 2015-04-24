@@ -17,7 +17,9 @@
                         <div class="centering">
                             <ul class="tags-post">
                                 {% for category in post.metadata.categories %}
-                                    <li class="item-tag-post" data-post-category="{{ category }}"></li>
+                                    <li class="item-tag-post">
+                                        <a class="categoryTag {{ category }}" href="/categories/{% if post.metadata.default_lang %}{{ post.metadata.lang }}/{% endif %}{{ category | lower | trim }}">{{ category }}</a>
+                                    </li>
                                 {% endfor %}
                             </ul>
                         </div>

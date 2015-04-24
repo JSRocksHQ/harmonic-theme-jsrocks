@@ -3,9 +3,11 @@
         <div class="row row-down">
             <div class="col-sm-2 col-xs-12 flags-list">
                 <div>
-                    <a href="/pt-br" class="item-flag"><img src="/images/flag-ptbr-header.png" alt="Brazil flag" title="Brazilian Portuguese"></a>
-                    <a href="/" class="item-flag"><img src="/images/flag-english-header.png" alt="U.K. flag" title="English"></a>
-                    <a href="/cn" class="item-flag"><img src="/images/flag-chinese-header.png" alt="Chinese flag" title="Chinese"></a>
+                    {% for flag in config.i18n.languages %}
+                        <a  class="item-flag" href="{% if flag ==  config.i18n.default %}/ {% else %}/{{ flag }}{% endif %}">
+                            <img src="/images/flag-{{ flag }}.png">
+                        </a>
+                    {% endfor %}
                 </div>
             </div>
             <div class="col-sm-8 col-xs-12 txt-header">
