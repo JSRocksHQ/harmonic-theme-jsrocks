@@ -48,4 +48,26 @@
 		var s = document.getElementsByTagName('script')[0];
 		s.parentNode.insertBefore(po, s);
 	})();
+
+
+	/**
+	 *
+	 * DISQUS COMMENT
+	 *
+	 **/
+	(function disqus(id) {
+	   if (document.getElementById(id)) {
+	        var disqus_shortname = 'es6rocks';
+
+	        (function() {
+	            var dsq = document.createElement('script');
+
+	            dsq.type = 'text/javascript';
+	            dsq.async = true;
+	            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+	            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	        })();
+	    }
+	})('disqus_thread');
 })();

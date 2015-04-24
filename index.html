@@ -27,7 +27,9 @@
                                     <section class="footer-post">
                                         <ul class="tags-post">
                                             {% for category in post.categories %}
-                                                <li class="item-tag-post" data-post-category="{{ category }}"></li>
+                                                <li class="item-tag-post" data-post-category="{{ category }}">
+                                                    <a href="/categories/{% if post.default_lang %}{{ post.lang }}/{% endif %}{{ category | lower | trim }}">{{category}}</a>
+                                                </li>
                                             {% endfor %}
                                         </ul>
                                         <div class="author-post">
