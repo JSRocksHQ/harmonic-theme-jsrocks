@@ -1,10 +1,15 @@
 /* TEAM */
 
-	Chef: Jaydson Gomes
+	Maintainer: Jaydson Gomes
 	Contact: jayalemao@gmail.com
 	Website: http://jaydson.org
 	Twitter: @jaydson
 	From: Porto Alegre
+
+	Maintainer: Fabrício Matté
+	Twitter: @Ult_Combo
+	Website: http://ultcombo.js.org
+	From: Pelotas
 
 	Web designer: Ítalo Waxman
 	Contact: http://br.linkedin.com/in/italowaxman/
@@ -18,15 +23,8 @@
 	From: Porto Alegre
 
 
-/* THANKS */
-
-	Maintainer: Fabrício Matté
-	Twitter: @Ult_Combo
-	From: Pelotas
-
-
 /* SITE */
-	Last update:2015/18/05
+	Last update: 2015/21/05
 	Language: Portuguese / English / Chinese
-	Doctype:HTML5
+	Doctype: HTML5
 	IDE: Sublime Text, Photoshop
