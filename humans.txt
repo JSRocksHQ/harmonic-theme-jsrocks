@@ -28,3 +28,4 @@
 	Language: Portuguese / English / Chinese
 	Doctype: HTML5
 	IDE: Sublime Text, Photoshop
+
