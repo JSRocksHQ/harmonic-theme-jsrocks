@@ -68,6 +68,7 @@ var JsRocks = function() {
 	*
 	**/
 	pageElements.btnMorePosts = D.getElementById('morePosts');
+    pageElements.logo = D.querySelectorAll('logo-jsrocks');
 
 
 	/**
