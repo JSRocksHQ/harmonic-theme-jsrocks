@@ -46,20 +46,18 @@ var JsRocks = function() {
 	* DEFINE
 	*
 	**/
-	var	HARMONIC = new Harmonic(),
-		W = window,
-		D = document,
-		PROTOCOL = W.location.protocol,
-		HOST = W.location.host,
-		HOSTNAME = W.location.hostname,
-		PATHNAME = W.location.pathname,
-		ORIGIN = W.location.origin,
-		INFORMATIONS = {},
-		TEMPLATE = {},
-		JSROCKS = {},
-		PRIVATE = {},
-		PUBLIC = this,
-		pageElements = {};
+    var PUBLIC        = this;
+	var	PRIVATE       = {};
+    var PROTOCOL      = window.location.protocol;
+    var HOST          = window.location.host;
+    var HOSTNAME      = window.location.hostname;
+    var PATHNAME      = window.location.pathname;
+    var ORIGIN        = window.location.origin;
+    var HARMONIC      = new Harmonic();
+    var INFORMATIONS  = {};
+    var TEMPLATE      = {};
+    var JSROCKS       = {};
+    var pageElements  = {};
 
 
 	/**
@@ -67,8 +65,8 @@ var JsRocks = function() {
 	* DEFINE ELEMENTS
 	*
 	**/
-	pageElements.btnMorePosts = D.getElementById('morePosts');
-    pageElements.logo = D.querySelectorAll('.logo-jsrocks');
+	pageElements.btnMorePosts = document.getElementById('morePosts');
+    pageElements.logo = document.querySelectorAll('.logo-jsrocks');
 
 
 	/**
@@ -77,8 +75,8 @@ var JsRocks = function() {
 	*
 	**/
 	INFORMATIONS.lang = function () {
-		var re = /\/pt-br\/|\/cn\//.exec(PATHNAME),
-			lang;
+		var re = /\/pt-br\/|\/cn\//.exec(PATHNAME);
+		var	lang;
 
 		switch (re && re[0]) {
 			case '/pt-br/':
@@ -164,7 +162,7 @@ var JsRocks = function() {
 	*
 	**/
 	PRIVATE.googleSearch = function () {
-		var form = D.getElementById('s');
+		var form = document.getElementById('s');
 
 		if (form) {
 			form.addEventListener('submit', function(e) {
@@ -174,11 +172,11 @@ var JsRocks = function() {
 	};
 
 	PRIVATE.shareSocialnetwork = function () {
-		var btnList = D.querySelectorAll('.share-item'),
-			btnLen = btnList.length,
-			btn,
-			postUrl,
-			providerUrl;
+		var btnList = document.querySelectorAll('.share-item');
+		var	btnLen = btnList.length;
+		var	btn;
+		var	postUrl;
+		var	providerUrl;
 
 		if (!!btnLen) {
 			for (var i = 0; i < btnLen; i++) {
@@ -192,12 +190,12 @@ var JsRocks = function() {
 	};
 
 	PRIVATE.otherPosts = function () {
-		var postsContainer = D.getElementById('otherPosts'),
-			article = '',
-			articleCat,
-			post,
-			categoriesLen,
-			category;
+		var postsContainer = document.getElementById('otherPosts');
+		var	article = '';
+		var	articleCat;
+		var	post;
+		var	categoriesLen;
+		var	category;
 
 		if (postsContainer) {
 			for (var i = 0; i < 3; i++) {
@@ -218,13 +216,13 @@ var JsRocks = function() {
 	};
 
 	PRIVATE.morePosts = function () {
-		var postsContainer = D.getElementById('containerMorePosts'),
-			posts = JSROCKS.posts,
-			post,
-			article,
-			articleCat,
-			categoriesLen,
-			category;
+		var postsContainer = document.getElementById('containerMorePosts');
+		var	posts = JSROCKS.posts;
+		var	post;
+		var	article;
+		var	articleCat;
+		var	categoriesLen;
+		var	category;
 
 		posts.splice(0, 8);
 
@@ -279,10 +277,10 @@ var JsRocks = function() {
 	}
 
 	PRIVATE.popularTag = function () {
-		var arr = ['modules' ,'scope', 'tutorial'],
-			arrLen = arr.length,
-			str = '',
-			container = D.querySelectorAll('.list-tags');
+		var arr = ['modules' ,'scope', 'tutorial'];
+		var	arrLen = arr.length,
+		var	str = '';
+		var	container = document.querySelectorAll('.list-tags');
 
 		if (!!container.length) {
 			for (var i = 0; i < arrLen ; i++) {
@@ -300,7 +298,7 @@ var JsRocks = function() {
 	*
 	**/
 	PUBLIC.scrollTop = function (btn, event, posTop, time) {
-		var btn = D.getElementById(btn);
+		var btn = document.getElementById(btn);
 
 		if (btn) {
 			btn.addEventListener(event, function () {
