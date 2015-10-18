@@ -70,7 +70,7 @@ $(document).ready(function() {
     * INFORMATIONS METHODS
     *
     **/
-	INFORMATIONS.lang = function () {
+	INFORMATIONS.lang = function() {
 		var re = /\/pt-br\/|\/cn\//.exec(PATHNAME);
 		var	lang;
 
@@ -89,7 +89,7 @@ $(document).ready(function() {
 		return lang;
 	};
 
-	INFORMATIONS.categoryPath = function (lang) {
+	INFORMATIONS.categoryPath = function(lang) {
 		var pathCategory;
 
 		switch (lang) {
@@ -112,7 +112,7 @@ $(document).ready(function() {
 	* TEMPLATE
 	*
 	**/
-	TEMPLATE.article = function (postLink, date, origin, title, content, category, authorPicture, authorLink, authorName) {
+	TEMPLATE.article = function(postLink, date, origin, title, content, category, authorPicture, authorLink, authorName) {
 		var tpl = '';
 
 		tpl += '<article class="col-md-4 col-sm-6 col-xs-12 post-normal item-post post-fade-6">';
@@ -140,7 +140,7 @@ $(document).ready(function() {
 		return tpl;
 	};
 
-	TEMPLATE.popularTag = function (tag) {
+	TEMPLATE.popularTag = function(tag) {
 		var tpl = '';
 
 		tpl += '<li class="item-list-tag">';
@@ -155,7 +155,7 @@ $(document).ready(function() {
 	* FUNCTIONS
 	*
 	**/
-	function googleSearch () {
+	function googleSearch() {
 		var form = document.getElementById('s');
 
 		if (form) {
@@ -165,7 +165,7 @@ $(document).ready(function() {
 		}
 	};
 
-	function shareSocialnetwork () {
+	function shareSocialnetwork() {
 		var btnList = document.querySelectorAll('.share-item');
 		var	btnLen = btnList.length;
 		var	btn;
@@ -202,8 +202,8 @@ $(document).ready(function() {
 				 	articleCat += '<li class="item-tag-post"><a href="'+ ORIGIN + JSROCKS.categoryPath + category +'">' + category + '</a></li>\n';
 				}
 
-                console.log('POST CONTENT');
-                console.log(post.content);
+                console.log('POST');
+                console.log(post);
                 console.log(' ');
 
 				article += TEMPLATE.article(post.link, post.date, ORIGIN, post.title, post.content, articleCat, post.authorPicture, post.authorLink, post.authorName);
@@ -213,7 +213,7 @@ $(document).ready(function() {
 		}
 	};
 
-	function morePosts () {
+	function morePosts() {
 		var postsContainer = document.getElementById('containerMorePosts');
 		var	posts = JSROCKS.posts;
 		var	post;
@@ -274,7 +274,7 @@ $(document).ready(function() {
 		}
 	}
 
-	function popularTag () {
+	function popularTag() {
 		var arr = ['modules' ,'scope', 'tutorial'];
 		var	arrLen = arr.length;
 		var	str = '';
@@ -289,7 +289,7 @@ $(document).ready(function() {
 		}
 	};
 
-	function scrollTop (btn, event, posTop, time) {
+	function scrollTop(btn, event, posTop, time) {
 		var btn = document.getElementById(btn);
 
 		if (btn) {
